@@ -55,33 +55,33 @@
 
 # Output: 9
 
-import random as r
-while True:
-    try:
-        N = int(input("Введите количество кустов черники >>> "))
-        if N <= 0:
-            raise Exception
+# import random as r
+# while True:
+#     try:
+#         N = int(input("Введите количество кустов черники >>> "))
+#         if N <= 0:
+#             raise Exception
         
-        break
-    except:
-        print('Вы ввели не натуральное число, попробуйте еще раз')
+#         break
+#     except:
+#         print('Вы ввели не натуральное число, попробуйте еще раз')
 
 
-def get_berries_max_amount(arr):
-    if len(arr) <= 3:
-        return sum(arr)
-    else:
-        arr.extend(arr[:2])
-        max_amount = sum(arr[:3])
-        for i in range(1, len(arr) - 2):
-            temp = sum(arr[i:i+3])
-            if temp > max_amount:
-                max_amount= temp
-        return max_amount
-N = [r.randint(1, 50) for _ in range(N)]
-print('количество ягод на кустах:', *N)
+# def get_berries_max_amount(arr):
+#     if len(arr) <= 3:
+#         return sum(arr)
+#     else:
+#         arr.extend(arr[:2])
+#         max_amount = sum(arr[:3])
+#         for i in range(1, len(arr) - 2):
+#             temp = sum(arr[i:i+3])
+#             if temp > max_amount:
+#                 max_amount= temp
+#         return max_amount
+# N = [r.randint(1, 50) for _ in range(N)]
+# print('количество ягод на кустах:', *N)
 
-print('Максимальное количество ягод, которое может собрать собирающий модуль за один проход: ', get_berries_max_amount(N))
+# print('Максимальное количество ягод, которое может собрать собирающий модуль за один проход: ', get_berries_max_amount(N))
 
 
 # Задачи на повторение по материалам предыдущих семинаров (по желанию)
@@ -90,13 +90,27 @@ print('Максимальное количество ягод, которое м
 # Пример: 
 # при d = 0.001, π = 3.141    0.1 ≤ d ≤ 0.00000000001
 
+from math import pi
 
+while True:
+    try:
+        d = int(input("Укажите точность числа pi (количество знаков после запятой от 1 до 11) >>> "))
+        if d < 1 or d > 11:
+            raise Exception
+        break
+    except:
+        print('Число знаков введено некорректно, попробуйте еще раз')
 
+print(round(pi, d)) #вычисление pi с округлением
+
+print(str(pi)[:d+2]) #pi без округления
 
 
 
 
 # Задача 102 Задайте натуральное число N. Напишите программу, которая составит список простых множителей числа N.
+
+
 
 # Задача 103 Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена и записать в файл file1.txt многочлен степени k.
 
