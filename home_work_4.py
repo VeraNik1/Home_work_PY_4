@@ -177,7 +177,46 @@ k_2 = input_int()
 with open('file2.txt', 'w', encoding='UTF-8') as file_2:
     file_2.write(get_polynomial(k_2))
 
-# Задача 104. Даны два файла file1.txt и file2.txt, в каждом из которых находится запись многочлена (полученные в результате работы программы из задачи 103). Необходимо сформировать файл file_sum.txt, содержащий сумму многочленов.
+# Задача 104. Даны два файла file1.txt и file2.txt, в каждом из которых находится запись многочлена 
+# (полученные в результате работы программы из задачи 103). Необходимо сформировать файл file_sum.txt, 
+# содержащий сумму многочленов.
+def get_dict_from_polinom(text):
+    res = {}
+    arr = text[:-4].split(' + ')
+    for item in arr:
+        key = item.count('x')
+        res[key] = int(''.join([i for i in item if i.isdigit()]))
+    return res
+
+def sum_dict(d1, d2):
+    sum_dict = {}
+    keys = set(list(d1) + list(d2))
+    for k in sorted(keys, reverse=True):
+        if k in d1: 
+            sum_dict[k] = d1[k]
+        if k in d2:
+            sum_dict[k] += d2[k]
+    return sum_dict
+
+def get_polinom_from_dict(data):
+    res = ''
+    for k, v in data.items():
+        if k:
+            res += str(v) + k*'*x' + ' + '
+        else:
+            res += str(v) + ' = 0'
+    return res
+
+with open('file1.txt', 'r', encoding='UTF-8') as file_1,\
+    open('file2.txt', 'r', encoding='UTF-8') as file_2,\
+    open('file_sum.txt', 'w', encoding='UTF-8') as out:
+    poly_1 = file_1.readline()
+    poly_2 = file_2.readline()
+    dict_1 = get_dict_from_polinom(poly_1)
+    dict_2 = get_dict_from_polinom(poly_2)
+    dict_sum = sum_dict(dict_1, dict_2)
+    print(get_polinom_from_dict(dict_sum), file=out)
+
 
 # Задача 105 Напишите программу, удаляющую из текста все слова, содержащие ""абв"".
 
