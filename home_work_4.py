@@ -109,44 +109,74 @@
 
 
 # Задача 102 Задайте натуральное число N. Напишите программу, которая составит список простых множителей числа N.
-while True:
-    try:
-        N = int(input("Введите натуральное число N >>> "))
-        if N <= 0:
-            raise Exception
-        break
-    except:
-        print('Вы ввели не натуральное число, попробуйте еще раз')
+# while True:
+#     try:
+#         N = int(input("Введите натуральное число N >>> "))
+#         if N <= 0:
+#             raise Exception
+#         break
+#     except:
+#         print('Вы ввели не натуральное число, попробуйте еще раз')
 
-def prime_factorization(N):
-    res = []
-    while N % 2 == 0:
-        res.append(2)
-        N //= 2
-    while N % 3 == 0:
-        res.append(3)
-        N //= 3
-    while N > 3:
-        for i in range(5, N + 1):
-            if N % i == 0:
-                res.append(i)
-                N //= i
-                break
+# def prime_factorization(N): #функция разложения числа на простые множители
+#     res = []
+#     while N % 2 == 0:
+#         res.append(2)
+#         N //= 2
+#     while N % 3 == 0:
+#         res.append(3)
+#         N //= 3
+#     while N > 3:
+#         for i in range(5, N + 1):
+#             if N % i == 0:
+#                 res.append(i)
+#                 N //= i
+#                 break
         
-    return res
-print(N, end=' = ')
-print(*prime_factorization(N), sep='*')
+#     return res
+# print(N, end=' = ')
+# print(*prime_factorization(N), sep='*')
 
 
 
-# Задача 103 Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена и записать в файл file1.txt многочлен степени k.
-
+# Задача 103 Задана натуральная степень k. Сформировать случайным образом список коэффициентов 
+# (значения от 0 до 100) многочлена и записать в файл file1.txt многочлен степени k.
 # Пример:  k=2 
 
 # Возможные варианты многочленов:
 # 2*x*x + 4*x + 5 = 0 
 # x*x + 5 = 0 
 # 10*x*x = 0
+import random as r
+def input_int():
+    while True:
+        try:
+            k = int(input())
+            if k <= 0:
+                raise Exception
+            return k
+        except:
+            print('Вы ввели не натуральное число, попробуйте еще раз')
+
+def get_polynomial(K):
+    polynom = ''
+    for i in range(K):
+        temp = r.randint(0, 100)
+        if temp:
+            polynom = ' + ' + str(temp) + i * '*x' + polynom
+    polynom = str(r.randint(1, 100)) + K * '*x' + polynom + ' = 0'
+    return polynom
+
+print('Введите натуральную степень первого многочлена >>>')
+k_1 = input_int()    
+with open('file1.txt', 'w', encoding='UTF-8') as file_1:
+    file_1.write(get_polynomial(k_1))
+print('Введите натуральную степень второго многочлена >>>')
+
+k_2 = input_int()    
+with open('file2.txt', 'w', encoding='UTF-8') as file_2:
+    file_2.write(get_polynomial(k_2))
+
 # Задача 104. Даны два файла file1.txt и file2.txt, в каждом из которых находится запись многочлена (полученные в результате работы программы из задачи 103). Необходимо сформировать файл file_sum.txt, содержащий сумму многочленов.
 
 # Задача 105 Напишите программу, удаляющую из текста все слова, содержащие ""абв"".
