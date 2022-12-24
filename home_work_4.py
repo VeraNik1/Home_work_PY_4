@@ -90,25 +90,52 @@
 # Пример: 
 # при d = 0.001, π = 3.141    0.1 ≤ d ≤ 0.00000000001
 
-from math import pi
+# from math import pi
 
-while True:
-    try:
-        d = int(input("Укажите точность числа pi (количество знаков после запятой от 1 до 11) >>> "))
-        if d < 1 or d > 11:
-            raise Exception
-        break
-    except:
-        print('Число знаков введено некорректно, попробуйте еще раз')
+# while True:
+#     try:
+#         d = int(input("Укажите точность числа pi (количество знаков после запятой от 1 до 11) >>> "))
+#         if d < 1 or d > 11:
+#             raise Exception
+#         break
+#     except:
+#         print('Число знаков введено некорректно, попробуйте еще раз')
 
-print(round(pi, d)) #вычисление pi с округлением
+# print(round(pi, d)) #вычисление pi с округлением
 
-print(str(pi)[:d+2]) #pi без округления
+# print(str(pi)[:d+2]) #pi без округления
 
 
 
 
 # Задача 102 Задайте натуральное число N. Напишите программу, которая составит список простых множителей числа N.
+while True:
+    try:
+        N = int(input("Введите натуральное число N >>> "))
+        if N <= 0:
+            raise Exception
+        break
+    except:
+        print('Вы ввели не натуральное число, попробуйте еще раз')
+
+def prime_factorization(N):
+    res = []
+    while N % 2 == 0:
+        res.append(2)
+        N //= 2
+    while N % 3 == 0:
+        res.append(3)
+        N //= 3
+    while N > 3:
+        for i in range(5, N + 1):
+            if N % i == 0:
+                res.append(i)
+                N //= i
+                break
+        
+    return res
+print(N, end=' = ')
+print(*prime_factorization(N), sep='*')
 
 
 
