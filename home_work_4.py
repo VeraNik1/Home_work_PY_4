@@ -14,25 +14,25 @@
 
 # Output: 6 12
 
-import random as r
-while True:
-    try:
-        n = int(input("Введите длину первого набора >>> "))
-        m = int(input("Введите длину второго набора >>> "))
-        if n > 0 and m > 0:
-            break
-        else:
-            raise Exception
+# import random as r
+# while True:
+#     try:
+#         n = int(input("Введите длину первого набора >>> "))
+#         m = int(input("Введите длину второго набора >>> "))
+#         if n > 0 and m > 0:
+#             break
+#         else:
+#             raise Exception
 
-    except:
-        print('Вы ввели не натуральное число, попробуйте еще раз')
+#     except:
+#         print('Вы ввели не натуральное число, попробуйте еще раз')
 
-N = [r.randint(0, 10) for _ in range(n)]
-M = [r.randint(0, 10) for _ in range(m)]
-print('первый набор чисел:', N)
-print('второй набор чисел:', M)
+# N = [r.randint(0, 10) for _ in range(n)]
+# M = [r.randint(0, 10) for _ in range(m)]
+# print('первый набор чисел:', N)
+# print('второй набор чисел:', M)
 
-print('Числа, встерчающиеся в обоих наборах: ', *sorted(set(N).intersection(set(M))))
+# print('Числа, встерчающиеся в обоих наборах: ', *sorted(set(N).intersection(set(M))))
 
 
 
@@ -55,11 +55,47 @@ print('Числа, встерчающиеся в обоих наборах: ', *
 
 # Output: 9
 
+import random as r
+while True:
+    try:
+        N = int(input("Введите количество кустов черники >>> "))
+        if N <= 0:
+            raise Exception
+        
+        break
+    except:
+        print('Вы ввели не натуральное число, попробуйте еще раз')
+
+
+def get_berries_max_amount(arr):
+    if len(arr) <= 3:
+        return sum(arr)
+    else:
+        arr.extend(arr[:2])
+        max_amount = sum(arr[:3])
+        for i in range(1, len(arr) - 2):
+            temp = sum(arr[i:i+3])
+            if temp > max_amount:
+                max_amount= temp
+        return max_amount
+N = [r.randint(1, 50) for _ in range(N)]
+print('количество ягод на кустах:', *N)
+
+print('Максимальное количество ягод, которое может собрать собирающий модуль за один проход: ', get_berries_max_amount(N))
+
+
 # Задачи на повторение по материалам предыдущих семинаров (по желанию)
 # Задача 101 Вычислить число π c заданной точностью d
 
 # Пример: 
 # при d = 0.001, π = 3.141    0.1 ≤ d ≤ 0.00000000001
+
+
+
+
+
+
+
 # Задача 102 Задайте натуральное число N. Напишите программу, которая составит список простых множителей числа N.
 
 # Задача 103 Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена и записать в файл file1.txt многочлен степени k.
